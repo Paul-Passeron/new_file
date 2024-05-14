@@ -1,9 +1,19 @@
 # New File Utility
 Creates .c and .h files automatically
 
+## Installation
+```sh
+git clone https://github.com/Paul-Passeron/new_file.git
+cd new_file
+make
+sudo make install
+cd .. 
+rm -rf new_file
+```
+
 ## Usage:
 (In your project directory, containing an include and src folder)
-```console
+```sh
 new_file <name>
 ```
 
@@ -13,7 +23,7 @@ include/<name>.h
 
 ## Example:
 
-```console
+```sh
 new_file hello_world
 ```
 

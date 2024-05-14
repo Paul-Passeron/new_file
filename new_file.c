@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 char *this = NULL;
@@ -59,8 +60,8 @@ int main(int argc, char **argv) {
   sprintf(filename_src, "./src/%s.c", file);
 
   if (!folder_exists("include") || !folder_exists("src")) {
-    print_error_hier();
-    exit(1);
+    mkdir("include", 0775);
+    mkdir("src", 0775);
   }
 
   if (file_exists(filename_in) || file_exists(filename_src)) {
