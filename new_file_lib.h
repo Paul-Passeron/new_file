@@ -1,30 +1,12 @@
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
+#ifndef NEW_FILE_LIB_H
+#define NEW_FILE_LIB_H
 
-char *this = NULL;
+char *get_upper_filename(const char *fn);
+int folder_exists(const char *path);
+int file_exists(const char *path);
+void new_file(const char *file);
 
-// prints the usage of the executable
-void usage(void) {
-  printf("usage:\n\t");
-  printf("%s <filename>\n", this);
-  printf("Be mindful: only the file name is expected, not a path\n");
-}
-
-void print_error_hier() {
-  printf("[ERROR]: Unexpected directory hierarchy...\n");
-  printf("         Expected: _ *current*\n");
-  printf("                     |_ include\n");
-  printf("                        |_ ...\n");
-  printf("                     |_ src\n");
-  printf("                        |_ ...\n");
-  printf("                     |_ ...\n");
-}
-
+#ifdef NEW_FILE_IMPL
 // Warning, the result of this function is to be freed
 char *get_upper_filename(const char *fn) {
   size_t l = strlen(fn);
@@ -90,15 +72,5 @@ void new_file(const char *file) {
   fclose(src);
   free(upper_file);
 }
-
-int main(int argc, char **argv) {
-  this = argv[0];
-  if (argc != 2) {
-    printf("[ERROR]: expected 1 argument but got: %d\n", argc - 1);
-    usage();
-    exit(1);
-  }
-  char *file = argv[1];
-  new_file(file);
-  return 0;
-}
+#endif
+#endif // NEW_FILE_LIB_H
